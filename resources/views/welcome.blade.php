@@ -17,8 +17,8 @@
                 <select-cinema :data-cinemas="{{$cinemas}}"></select-cinema>
             @else
                 <h3>Please register or login to buy tickets</h3>
-                <a href="" class="btn btn-outline-light btn-lg">Register</a>
-                <a href="" class="btn btn-outline-light btn-lg">Login</a>
+                <a href="/register" class="btn btn-outline-light btn-lg">Register</a>
+                <a href="/login" class="btn btn-outline-light btn-lg">Login</a>
             @endif
 
 
