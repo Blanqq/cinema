@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class WelcomePageTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function testUnauthorizedUserNeedToLoginOrRegister()
     {
         $response = $this->get('/');
