@@ -4,7 +4,7 @@
             <form :action="computedRoute">
                 <select class="btn-lg" v-model="selectedCinema">
                     <option value="">Please select your cinema</option>
-                    <option v-for="cinema in cinemas" :value="cinema.id">{{cinema.name}}</option>
+                    <option v-for="cinema in cinemas" :value="cinema.slug">{{cinema.name}}</option>
                 </select><br>
                 <button class="btn btn-outline-light btn-lg" v-show="selectedCinema">Go Reserve Tickets</button>
             </form>

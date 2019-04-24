@@ -11,7 +11,14 @@ class WelcomePageTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUnauthorizedUserNeedToLoginOrRegister()
+    public function testAnyUserCanSeeWelcomePage()
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertSee('Welcome to our cinema network');
+    }
+    /*  this cant be tested now because it is transferred to vue component
+     * public function testUnauthorizedUserNeedToLoginOrRegister()
     {
         $response = $this->get('/');
         $response->assertStatus(200);
@@ -25,5 +32,5 @@ class WelcomePageTest extends TestCase
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('Go Reserve Tickets');
-    }
+    }*/
 }

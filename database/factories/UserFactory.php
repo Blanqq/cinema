@@ -28,10 +28,13 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(Cinema::class, function (Faker $faker){
     $city = $faker->city;
+    $city_slug = Str::slug($city);
     $street = $faker->streetName;
+    $street_slug = Str::slug($street);
     return [
         'name' => $city.' '.$street,
         'city' => $city,
         'street' => $street,
+        'slug' => $city_slug.'-'.$street_slug,
     ];
 });

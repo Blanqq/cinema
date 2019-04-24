@@ -18,6 +18,7 @@ class CreateCinemasTable extends Migration
             $table->text('name');
             $table->text('city');
             $table->text('street');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
