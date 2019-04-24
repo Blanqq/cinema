@@ -1809,11 +1809,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['dataCinemas'],
   data: function data() {
     return {
       selectedCinema: '',
+      onlyBrowse: false,
       cinemas: this.dataCinemas
     };
   },
@@ -36916,68 +36934,119 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { attrs: { action: _vm.computedRoute } }, [
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.selectedCinema,
-              expression: "selectedCinema"
-            }
-          ],
-          staticClass: "btn-lg",
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
+    _vm.signedIn || _vm.onlyBrowse
+      ? _c("div", [
+          _c("form", { attrs: { action: _vm.computedRoute } }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedCinema,
+                    expression: "selectedCinema"
+                  }
+                ],
+                staticClass: "btn-lg",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedCinema = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Please select your cinema")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.cinemas, function(cinema) {
+                  return _c("option", { domProps: { value: cinema.id } }, [
+                    _vm._v(_vm._s(cinema.name))
+                  ])
                 })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.selectedCinema = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c("option", { attrs: { value: "" } }, [
-            _vm._v("Please select your cinema")
-          ]),
+              ],
+              2
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.selectedCinema,
+                    expression: "selectedCinema"
+                  }
+                ],
+                staticClass: "btn btn-outline-light btn-lg"
+              },
+              [_vm._v("Go Reserve Tickets")]
+            )
+          ])
+        ])
+      : _c("div", [
+          _vm._m(0),
           _vm._v(" "),
-          _vm._l(_vm.cinemas, function(cinema) {
-            return _c("option", { domProps: { value: cinema.id } }, [
-              _vm._v(_vm._s(cinema.name))
-            ])
-          })
-        ],
-        2
+          _c("div", { staticStyle: { padding: "25px" } }, [
+            _c("h3", [_vm._v("or click button below")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-success btn-lg",
+                on: {
+                  click: function($event) {
+                    _vm.onlyBrowse = true
+                  }
+                }
+              },
+              [_vm._v("I JUST WANT TO SEE SHOWS!!")]
+            )
+          ])
+        ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { padding: "25px" } }, [
+      _c("h3", [_vm._v("Please register or login to buy tickets")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-outline-light btn-lg",
+          attrs: { href: "/register" }
+        },
+        [_vm._v("Register")]
       ),
       _vm._v(" "),
       _c(
-        "button",
+        "a",
         {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.selectedCinema,
-              expression: "selectedCinema"
-            }
-          ],
-          staticClass: "btn btn-outline-light btn-lg"
+          staticClass: "btn btn-outline-light btn-lg",
+          attrs: { href: "/login" }
         },
-        [_vm._v("Go Reserve Tickets")]
+        [_vm._v("Login")]
       )
     ])
-  ])
-}
-var staticRenderFns = []
+  }
+]
 render._withStripped = true
 
 
@@ -49214,6 +49283,25 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+Vue.prototype.authorize = function () {
+  if (!window.App.signedIn) return false;
+
+  for (var _len = arguments.length, params = new Array(_len), _key = 0; _key < _len; _key++) {
+    params[_key] = arguments[_key];
+  }
+
+  if (typeof params[0] === 'string') {
+    return authorizations[params[0]](params[1]);
+  }
+
+  return params[0](window.App.user);
+};
+
+Vue.prototype.signedIn = window.App.signedIn;
 
 /***/ }),
 
