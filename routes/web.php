@@ -11,12 +11,13 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome', ['cinemas' => \App\Cinema::all()]);
 });
 
 Route::get('/{cinema}', 'CinemaPageController@show');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

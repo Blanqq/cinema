@@ -14,7 +14,7 @@ class CinemaPageTest extends TestCase
     public function testAnyUserCanSeePageOfTheCinema()
     {
         $cinema = factory(Cinema::class)->create();
-        $response = $this->get('/'.$cinema->id);
+        $response = $this->get('/'.$cinema->slug);
         $response->assertSee($cinema->name);
     }
 }

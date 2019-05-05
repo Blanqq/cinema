@@ -17,12 +17,12 @@ class WelcomePageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Welcome to our cinema network');
     }
-    /*  this cant be tested now because it is transferred to vue component
-     * public function testUnauthorizedUserNeedToLoginOrRegister()
+      //this cant be tested now because it is transferred to vue component
+      public function testUnauthorizedUserNeedToLoginOrRegister()
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('Please register or login to buy tickets');
+        $response->assertSee('Login');
     }
 
     public function testAuthorizedUserCanSeeLinkToRegistrationService()
@@ -31,6 +31,6 @@ class WelcomePageTest extends TestCase
         $this->actingAs($user);
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('Go Reserve Tickets');
-    }*/
+        $response->assertSee($user->name);
+    }
 }
