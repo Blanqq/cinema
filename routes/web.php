@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome', ['cinemas' => \App\Cinema::all()]);
 });
 
+Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 Route::get('/{cinema}', 'CinemaPageController@show');
 
 

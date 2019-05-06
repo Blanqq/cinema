@@ -3,6 +3,11 @@
 body{
     overflow-x: hidden;
     font-family: 'Lato', sans-serif;
+    color: white;
+    background-color: #4e555b;
+}
+
+.card{
     color: #505962;
 }
 
