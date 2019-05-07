@@ -17,12 +17,12 @@ class IsAdmin
     {
         if(!auth()->check())
         {
-            return response()->view('errors.401');
+            return response()->view('errors.401', [], 401);
         }
         if (auth()->user()->isAdmin())
         {
             return $next($request);
         }
-        return view('errors.403');
+        return response()->view('errors.403', [], 403);
     }
 }

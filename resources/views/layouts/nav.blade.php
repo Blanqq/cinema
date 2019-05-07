@@ -10,11 +10,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                @if(auth()->check() && auth()->user()->isAdmin())
-                    <li class="nav-item">
-                        <a href="/admin" class="nav-link">Admin Panel</a>
-                    </li>
-                @endif
+                @can('view', auth()->user())
+                        <li class="nav-item">
+                            <a href="/admin" class="nav-link">Admin Panel</a>
+                        </li>
+                 @endcan
+
             </ul>
 
             <!-- Right Side Of Navbar -->

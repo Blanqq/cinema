@@ -29,4 +29,30 @@ class AdminPanelTest extends TestCase
         $response = $this->get('/');
         $response->assertDontSee('Admin Panel');
     }
+
+    public function testAdminCanVisitAdminPanel()
+    {
+        $this->signInAs('Admin');
+        $this->get('/admin')->assertSee('Admin Panel')->assertStatus(200);
+    }
+
+    public function testEmployeeCanNotVisitAdminPanel()
+    {
+        $this->signInAs('Employee');
+        $this->get('/admin')->assertSee('insufficient privileges')
+            ->assertStatus(403);
+    }
+
+    public function testNormalUserCanNotVisitAdminPanel()
+    {
+        $this->signInAs('Employee');
+        $this->get('/admin')->assertSee('insufficient privileges')
+            ->assertStatus(403);
+    }
+
+    public function testUnauthorizedUserCantSeeAdminPage()
+    {
+        $this->get('/admin')->assertSee('not logged in')
+            ->assertStatus(401);
+    }
 }

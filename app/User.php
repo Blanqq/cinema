@@ -41,12 +41,13 @@ class User extends Authenticatable
     {
         if($this === null)
         {
-            return response()->view('errors.401');
+            return false;
         }
-        if($this->roles()->where('role', 'Admin'))
+        if(count($this->roles()->where('name', 'Admin')->get()))
         {
             return true;
         }
+        return false;
     }
 
     public function roles()
