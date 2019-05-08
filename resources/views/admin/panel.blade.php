@@ -13,7 +13,9 @@
                 </div>
                 <div class="card-body">
                     <p>Select resource which You want to manege</p>
-                    <button class="btn btn-primary">Users</button>
+                    <form action="/admin/users">
+                        <button type="submit" class="btn btn-primary">Users</button>
+                    </form>
                 </div>
             </div>
 
