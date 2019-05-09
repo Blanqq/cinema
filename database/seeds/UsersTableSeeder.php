@@ -17,13 +17,6 @@ class UsersTableSeeder extends Seeder
         $role_employee = Role::where('name', 'Employee')->first();
         $role_admin = Role::where('name', 'Admin')->first();
 
-        $user = new User();
-        $user->name = 'User';
-        $user->email = 'user@example.com';
-        $user->password = bcrypt('user');
-        $user->save();
-        $user->roles()->attach($role_user);
-
         $admin = new User();
         $admin->name = 'Admin';
         $admin->email = 'admin@example.com';
@@ -37,5 +30,21 @@ class UsersTableSeeder extends Seeder
         $employee->password = bcrypt('employee');
         $employee->save();
         $employee->roles()->attach($role_employee);
+        $employee->roles()->attach($role_user);
+
+        $user = new User();
+        $user->name = 'User';
+        $user->email = 'user@example.com';
+        $user->password = bcrypt('user');
+        $user->email_verified_at = now();
+        $user->save();
+        $user->roles()->attach($role_user);
+
+
+
+        factory(User::class, 20)->create()->each(function($user){
+            $role_user = Role::where('name', 'User')->first();
+            $user->roles()->attach($role_user);
+        });
     }
 }

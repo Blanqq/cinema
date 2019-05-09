@@ -18,6 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
+Route::get('/admin/users', 'AdminPanelUserController@index')->middleware('is-admin');
+
 Route::get('/{cinema}', 'CinemaPageController@show');
 
 

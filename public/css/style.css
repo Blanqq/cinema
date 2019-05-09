@@ -73,6 +73,9 @@ body{
     margin: .2rem;
     font-size: 1.1rem;
 }
+tr:hover td {
+    color: #1ebba3;
+}
 
 
 
