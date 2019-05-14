@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 Route::get('/admin/users', 'AdminPanelUserController@index')->middleware('is-admin');
 
+Route::get('/users/{user}', 'UserController@show');
+Route::patch('/roles/update/{user}', 'RoleUserController@update');
+
 Route::get('/{cinema}', 'CinemaPageController@show');
 
 

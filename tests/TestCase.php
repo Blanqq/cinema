@@ -19,4 +19,12 @@ abstract class TestCase extends BaseTestCase
         $this->actingAs($user);
         return $this;
     }
+
+    protected function createUser($roleForUser = 'User')
+    {
+        $user = factory(User::class)->create();
+        $role = factory(Role::class)->create();
+        $user->roles()->attach($role);
+        return $user;
+    }
 }

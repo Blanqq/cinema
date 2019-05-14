@@ -22,6 +22,7 @@
                             <th scope="col">Email Verified</th>
                             <th scope="col">Created</th>
                             <th scope="col">Roles</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,11 @@
                                         @endif
 
                                     @endforeach</td>
+                                <td>
+                                    <form action="/users/{{ $user->id }}" method="GET">
+                                        <button type="submit" class="btn btn-primary">Edit Roles</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
