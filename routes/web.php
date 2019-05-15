@@ -18,10 +18,18 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
-Route::get('/users', 'UserController@index')->middleware('is-admin');
 
+Route::get('/roles', 'RoleController@index')->middleware('is-admin');
+Route::get('/roles/create', 'RoleController@create')->middleware('is-admin');
+Route::post('/roles', 'RoleController@store');
+Route::delete('/roles/{role}', 'RoleController@destroy');
+Route::get('/roles/{role}/edit', 'RoleController@edit');
+Route::put('/roles/{role}', 'RoleController@update');
+
+Route::get('/users', 'UserController@index')->middleware('is-admin');
 Route::get('/users/{user}', 'UserController@show');
-Route::patch('/roles_users/update/{user}', 'RoleUserController@update')->middleware('is-admin');
+Route::patch('/roles_users/update/{user}', 'RoleUserController@update')
+    ->middleware('is-admin');
 
 Route::get('/{cinema}', 'CinemaPageController@show');
 

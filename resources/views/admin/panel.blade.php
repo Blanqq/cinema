@@ -13,9 +13,16 @@
                 </div>
                 <div class="card-body">
                     <p>Select resource which You want to manege</p>
-                    <form action="/users">
-                        <button type="submit" class="btn btn-primary">Users</button>
-                    </form>
+                    <div class="form-group">
+                        <form action="/roles">
+                            <button type="submit" class="btn btn-primary">Roles</button>
+                        </form>
+                    </div>
+                    <div class="form-group">
+                        <form action="/users">
+                            <button type="submit" class="btn btn-primary">Users</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 

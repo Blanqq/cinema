@@ -55,4 +55,20 @@ class AdminPanelTest extends TestCase
         $this->get('/admin')->assertSee('not logged in')
             ->assertStatus(401);
     }
+
+    public function testAdminHaveAccessToRolesIndexView()
+    {
+        $this->signInAs('Admin');
+        $this->get('/roles')->assertStatus(200)->assertSee('Roles Management Panel');
+    }
+    public function testEmployeeHaveAccessToRolesIndexView()
+    {
+        $this->signInAs('Employee');
+        $this->get('/roles')->assertStatus(403);
+    }
+    public function testUserHaveAccessToRolesIndexView()
+    {
+        $this->signInAs('User');
+        $this->get('/roles')->assertStatus(403);
+    }
 }

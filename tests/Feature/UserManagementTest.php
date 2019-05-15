@@ -14,28 +14,28 @@ class UserManagementTest extends TestCase
 
     public function testUnauthenticatedUserCanNotSeeUserManagementPage()
     {
-        $this->get('/admin/users')
+        $this->get('/users')
             ->assertStatus(401);
     }
 
     public function testNormalUserCanNotSeeUserManagementPage()
     {
         $this->signInAs('User');
-        $this->get('/admin/users')
+        $this->get('/users')
             ->assertStatus(403);
     }
 
     public function testEmployeeCanNotSeeUserManagementPage()
     {
         $this->signInAs('Employee');
-        $this->get('/admin/users')
+        $this->get('/users')
             ->assertStatus(403);
     }
 
     public function testAdminCanSeeUserManagementPage()
     {
         $this->signInAs('Admin');
-        $this->get('/admin/users')
+        $this->get('/users')
             ->assertStatus(200)
             ->assertSee('User Management Panel');
     }
