@@ -15,7 +15,7 @@
                 @if (auth()->check())
                     @if (auth()->user()->isAdmin())
                         User Roles
-                        <form action="/roles/update/{{ $user->id }}" method="POST">
+                        <form action="/roles_users/update/{{ $user->id }}" method="POST">
                             @method('PATCH')
                             @csrf
                             @foreach ($all_roles as $role)

@@ -50,7 +50,7 @@
                                     @endforeach</td>
                                 <td>
                                     <form action="/users/{{ $user->id }}" method="GET">
-                                        <button type="submit" class="btn btn-primary">Edit Roles</button>
+                                        <button type="submit" class="btn btn-primary">Manage</button>
                                     </form>
                                 </td>
                             </tr>

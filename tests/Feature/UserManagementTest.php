@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -55,6 +56,33 @@ class UserManagementTest extends TestCase
         $this->get('/users/'.$user->id)
             ->assertSee($user->name)
             ->assertDontSee('User Roles');
+    }
 
+    public function testUserCantManageUserRoles()
+    {
+        $user = $this->createUser();
+        factory(Role::class)->create(['name' => 'Employee']);
+        $this->signInAs('User');
+        $this->patch('/roles_users/update/'.$user->id, ['user_roles' => ['Employee']])
+            ->assertSee('insufficient privileges')
+            ->assertStatus(403);
+    }
+    public function testEmployeeCantManageUserRoles()
+    {
+        $user = $this->createUser();
+        $this->signInAs('Employee');
+
+        $this->patch('/roles_users/update/'.$user->id, ['user_roles' => ['Employee']])
+            ->assertSee('insufficient privileges')
+            ->assertStatus(403);
+    }
+
+    public function testAdminCanManageUserRoles()
+    {
+        $user = $this->createUser();
+        $role = factory(Role::class)->create(['name' => 'Employee']);
+        $this->signInAs('Admin');
+        $this->patch('/roles_users/update/'.$user->id, ['user_roles' => ['Employee']]);
+        $this->assertDatabaseHas('role_user', ['user_id' => $user->id, 'role_id' => $role->id]);
     }
 }

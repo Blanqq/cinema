@@ -21,7 +21,7 @@ Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 Route::get('/admin/users', 'AdminPanelUserController@index')->middleware('is-admin');
 
 Route::get('/users/{user}', 'UserController@show');
-Route::patch('/roles/update/{user}', 'RoleUserController@update');
+Route::patch('/roles_users/update/{user}', 'RoleUserController@update')->middleware('is-admin');
 
 Route::get('/{cinema}', 'CinemaPageController@show');
 
