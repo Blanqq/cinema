@@ -21,10 +21,10 @@ Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');
 Route::get('/roles/create', 'RoleController@create')->middleware('is-admin');
-Route::post('/roles', 'RoleController@store');
-Route::delete('/roles/{role}', 'RoleController@destroy');
-Route::get('/roles/{role}/edit', 'RoleController@edit');
-Route::put('/roles/{role}', 'RoleController@update');
+Route::post('/roles', 'RoleController@store')->middleware('is-admin');
+Route::delete('/roles/{role}', 'RoleController@destroy')->middleware('is-admin');
+Route::get('/roles/{role}/edit', 'RoleController@edit')->middleware('is-admin');
+Route::put('/roles/{role}', 'RoleController@update')->middleware('is-admin');
 
 Route::get('/users', 'UserController@index')->middleware('is-admin');
 Route::get('/users/{user}', 'UserController@show');
