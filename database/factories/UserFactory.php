@@ -3,6 +3,7 @@
 use App\User;
 use App\Cinema;
 use App\Role;
+use App\Genre;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -43,5 +44,11 @@ $factory->define(Cinema::class, function (Faker $faker){
         'city' => $city,
         'street' => $street,
         'slug' => $city_slug.'-'.$street_slug,
+    ];
+});
+
+$factory->define(Genre::class, function (Faker $faker){
+    return[
+        'name' => $faker->word  
     ];
 });
