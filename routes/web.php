@@ -26,6 +26,13 @@ Route::delete('/roles/{role}', 'RoleController@destroy')->middleware('is-admin')
 Route::get('/roles/{role}/edit', 'RoleController@edit')->middleware('is-admin');
 Route::put('/roles/{role}', 'RoleController@update')->middleware('is-admin');
 
+Route::get('/genres', 'GenreController@index')->name('genre.index')->middleware('is-employee');
+Route::post('/genres', 'GenreController@store')->middleware('is-employee');
+Route::get('/genres/create', 'GenreController@create')->middleware('is-employee');
+Route::delete('/genres/{genre}', 'GenreController@destroy')->middleware('is-employee');
+Route::get('/genres/{genre}/edit', 'GenreController@edit')->middleware('is-employee');
+Route::put('/genres/{genre}', 'GenreController@update')->middleware('is-employee');
+
 Route::get('/users', 'UserController@index')->middleware('is-admin');
 Route::get('/users/{user}', 'UserController@show');
 Route::patch('/roles_users/update/{user}', 'RoleUserController@update')

@@ -50,6 +50,19 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isEmployee()
+    {
+        if($this === null)
+        {
+            return false;
+        }
+        if(count($this->roles()->where('name', 'Employee')->orWhere('name', 'Admin')->get()))
+        {
+            return true;
+        }
+        return false;
+    }
+
     public function roles()
     {
         return $this->BelongsToMany(Role::class);

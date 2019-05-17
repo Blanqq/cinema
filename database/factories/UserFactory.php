@@ -49,6 +49,6 @@ $factory->define(Cinema::class, function (Faker $faker){
 
 $factory->define(Genre::class, function (Faker $faker){
     return[
-        'name' => $faker->word  
+        'name' => $faker->word
     ];
 });
