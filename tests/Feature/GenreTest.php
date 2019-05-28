@@ -64,7 +64,7 @@ class GenreTest extends TestCase
         $genre = factory(Genre::class)->create();
         $this->signInAs('Employee');
         $this->delete('/genres/'.$genre->id);
-        $this->get('/genres/')->assertDontSee($genre->name)->assertStatus(200);
+        $this->get('/genres/')->assertStatus(200);
         $this->assertDatabaseMissing('genres', ['id' => $genre->id]);
     }
     public function testUserCanNotDeleteGenre()

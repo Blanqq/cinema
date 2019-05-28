@@ -21,6 +21,11 @@ class AdminPolicy
         return $user->isAdmin();
     }
 
+    public function view_employee(User $user)
+    {
+        return $user->isEmployee();
+    }
+
     /**
      * Determine whether the user can create models.
      *

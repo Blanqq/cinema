@@ -14,7 +14,12 @@
                         <li class="nav-item">
                             <a href="/admin" class="nav-link">Admin Panel</a>
                         </li>
-                 @endcan
+                @endcan
+                @can('view_employee', auth()->user())
+                    <li class="nav-item">
+                        <a href="/employee" class="nav-link">Employee Panel</a>
+                    </li>
+                @endcan
 
             </ul>
 

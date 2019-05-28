@@ -23,6 +23,16 @@
                             <button type="submit" class="btn btn-primary">Users</button>
                         </form>
                     </div>
+                    <div class="form-group">
+                        <form action="/genres">
+                            <button type="submit" class="btn btn-primary">Genres</button>
+                        </form>
+                    </div>
+                    <div class="form-group">
+                        <form action="/movies">
+                            <button type="submit" class="btn btn-primary">Movies</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 

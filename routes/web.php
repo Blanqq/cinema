@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
+Route::get('employee', 'EmployeePanelController@index')->middleware('is-employee');
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');
 Route::get('/roles/create', 'RoleController@create')->middleware('is-admin');
@@ -35,8 +36,7 @@ Route::put('/genres/{genre}', 'GenreController@update')->middleware('is-employee
 
 Route::get('/users', 'UserController@index')->middleware('is-admin');
 Route::get('/users/{user}', 'UserController@show');
-Route::patch('/roles_users/update/{user}', 'RoleUserController@update')
-    ->middleware('is-admin');
+Route::patch('/roles_users/update/{user}', 'RoleUserController@update')->middleware('is-admin');
 
 Route::get('/{cinema}', 'CinemaPageController@show');
 
