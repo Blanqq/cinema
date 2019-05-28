@@ -25,6 +25,8 @@ class GenreController extends Controller
         ]);
 
         Genre::create(['name' => request('name')]);
+        $request->session()->flash('message', 'Genre successfully added!');
+        $request->session()->flash('level', 'success');
 
         return redirect()->route('genre.index');
     }
