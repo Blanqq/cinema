@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Role;
+use App\Movie;
 
 class UsersTableSeeder extends Seeder
 {
@@ -46,5 +47,7 @@ class UsersTableSeeder extends Seeder
             $role_user = Role::where('name', 'User')->first();
             $user->roles()->attach($role_user);
         });
+
+        factory(Movie::class)->create();
     }
 }

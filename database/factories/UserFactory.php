@@ -4,6 +4,7 @@ use App\User;
 use App\Cinema;
 use App\Role;
 use App\Genre;
+use App\Movie;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -50,5 +51,19 @@ $factory->define(Cinema::class, function (Faker $faker){
 $factory->define(Genre::class, function (Faker $faker){
     return[
         'name' => $faker->word
+    ];
+});
+
+$factory->define(Movie::class, function (Faker $faker){
+    $name = $faker->company;
+    return[
+        'name' => $name,
+        'year' => $faker->numberBetween(2000, 2019),
+
+        'poster' => $faker     // image faker uses lorempixel.com service if service is down faker returns 0
+            ->image('public/storage/images/posters',420, 594, 'people', false),
+        'movie_premiere_image' =>
+            $faker->image('public/storage/images/premiere_images', 1280, 720,null, false),
+        'description' => $faker->paragraphs(2, true),
     ];
 });

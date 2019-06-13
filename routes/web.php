@@ -18,7 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
-Route::get('employee', 'EmployeePanelController@index')->middleware('is-employee');
+Route::get('/employee', 'EmployeePanelController@index')->middleware('is-employee');
+
+Route::get('/movies/create/', 'MovieController@create');
+Route::get('/movies/{movie}', 'MovieController@show');
+Route::get('/movies/', 'MovieController@index');
+Route::post('/movies/', 'MovieController@store');
+
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');
 Route::get('/roles/create', 'RoleController@create')->middleware('is-admin');

@@ -1,0 +1,49 @@
+@extends('layouts.app')
+
+@section('title')
+    Add New Movie
+@endsection
+
+@section('content')
+
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                Add New Movie
+            </div>
+            <div class="card-body">
+                <form action="/movies/" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Name of new movie">
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year of premiere</label>
+                        <input type="text" class="form-control" name="year" placeholder="Year">
+                    </div>
+                    <div class="form-group">
+                        <label for="genres">Genres (can select many)</label>
+                        <select multiple class="form-control" name="genres[]" id="genres">
+                        @foreach ($genres as $genre)
+                            <option value="{{$genre->id}}">{{$genre->name}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="poster">Poster</label>
+                        <input type="file" class="form-control-file" id="poster" name="poster">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+@endsection
