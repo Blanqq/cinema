@@ -25,7 +25,7 @@ Route::get('/movies/{movie}', 'MovieController@show');
 Route::get('/movies/', 'MovieController@index');
 Route::post('/movies/', 'MovieController@store')->middleware('is-employee');
 Route::post('/api/movies/{movie}/poster', 'Api\MoviePosterController@store');
-Route::delete('/api/movies/{movie}', 'Api\MoviePosterController@destroy');
+Route::delete('/api/movies/{movie}/poster', 'Api\MoviePosterController@destroy');
 
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');

@@ -29,7 +29,7 @@
                         @endif
                         @if ($movie->poster)
                                 <div class="form-group">
-                                    <form action="/api/movies/{{$movie->id}}" method="POST">
+                                    <form action="/api/movies/{{$movie->id}}/poster" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-primary">Delete Image</button>
