@@ -31,13 +31,13 @@
                                     <form action="/roles/{{ $role->id  }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">DELETE</button>
+                                        <button type="submit" class="btn btn-danger" disabled>DELETE</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="/roles/{{ $role->id  }}/edit" method="GET">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">EDIT</button>
+                                        <button type="submit" class="btn btn-danger" disabled>EDIT</button>
                                     </form>
                                 </td>
                             </tr>

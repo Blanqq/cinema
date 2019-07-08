@@ -14,6 +14,30 @@
                 <p>
                     <img class="img-fluid" src="{{ $movie->poster_path }}" alt="{{ $movie->name }}">
                 </p>
+                @if(auth()->check())
+                    @if (auth()->user()->isEmployee())
+                        @if (!$movie->poster)
+                            <div class="form-group">
+                                <form action="/api/movies/{{$movie->id}}/poster" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <label for="poster">Add poster image</label>
+                                    <input type="file" class="form-control-file" id="poster" name="poster">
+                                    <button type="submit" class="btn btn-primary">Save Image</button>
+
+                                </form>
+                            </div>
+                        @endif
+                        @if ($movie->poster)
+                                <div class="form-group">
+                                    <form action="/api/movies/{{$movie->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-primary">Delete Image</button>
+                                    </form>
+                                </div>
+                        @endif
+                    @endif
+                @endif
                 @if ($movie_genres->count())
                     Genre:
                     @foreach($movie_genres as $genre)

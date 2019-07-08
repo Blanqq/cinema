@@ -56,7 +56,8 @@ class User extends Authenticatable
         {
             return false;
         }
-        if(count($this->roles()->where('name', 'Employee')->orWhere('name', 'Admin')->get()))
+
+        if(count($this->roles()->where(function($q) {$q->where('name', 'Employee')->orWhere('name', 'Admin');})->get()))
         {
             return true;
         }

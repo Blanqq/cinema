@@ -15,7 +15,6 @@ class IsEmployee
      */
     public function handle($request, Closure $next)
     {
-        {
             if(!auth()->check())
             {
                 return response()->view('errors.401', [], 401);
@@ -25,6 +24,5 @@ class IsEmployee
                 return $next($request);
             }
             return response()->view('errors.403', [], 403);
-        }
     }
 }

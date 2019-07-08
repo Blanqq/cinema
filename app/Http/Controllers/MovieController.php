@@ -37,23 +37,24 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate( [
+        $request->validate([            //later validation refactor to CreateMovieRequest class
             'name' => ['required'],
             'year' => ['required'],
-            'description' => ['required']
+            'description' => ['required'],
         ]);
 
-        $movie = Movie::create(['name' => request('name'),
+        $movie = Movie::create([
+                'name' => request('name'),
                 'year' => request('year'),
-                'description' => request('description'),
-                'poster' => request()->file('poster')->store('images/posters', 'public')
+                'description' => request('description')
             ]);
 
-        $movie->genres()->attach(request('genres'));
-        $movie_genres = $movie->genres;
-        //return view('movies.show', $movie->id)->with(['movie' => $movie, 'movie_genres' => $movie_genres]);
+        if(request('genres')){
+            $movie->genres()->attach(request('genres'));
+        }
+
         return redirect()->action('MovieController@show', ['id' => $movie->id])
-            ->with(['movie' => $movie, 'movie_genres' => $movie_genres]);
+            ->with(['movie' => $movie, 'movie_genres' => $movie->genres]);
     }
 
     /**
@@ -64,7 +65,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie = Movie::find($id);
+        $movie = Movie::findOrFail($id);
         $movie_genres = $movie->genres;
         return view('movies.show')->with(['movie' => $movie, 'movie_genres' => $movie_genres]);
     }

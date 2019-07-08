@@ -20,18 +20,20 @@ Route::get('/', function () {
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 Route::get('/employee', 'EmployeePanelController@index')->middleware('is-employee');
 
-Route::get('/movies/create/', 'MovieController@create');
+Route::get('/movies/create/', 'MovieController@create')->middleware('is-employee');
 Route::get('/movies/{movie}', 'MovieController@show');
 Route::get('/movies/', 'MovieController@index');
-Route::post('/movies/', 'MovieController@store');
+Route::post('/movies/', 'MovieController@store')->middleware('is-employee');
+Route::post('/api/movies/{movie}/poster', 'Api\MoviePosterController@store');
+Route::delete('/api/movies/{movie}', 'Api\MoviePosterController@destroy');
 
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');
 Route::get('/roles/create', 'RoleController@create')->middleware('is-admin');
 Route::post('/roles', 'RoleController@store')->middleware('is-admin');
-Route::delete('/roles/{role}', 'RoleController@destroy')->middleware('is-admin');
-Route::get('/roles/{role}/edit', 'RoleController@edit')->middleware('is-admin');
-Route::put('/roles/{role}', 'RoleController@update')->middleware('is-admin');
+//Route::delete('/roles/{role}', 'RoleController@destroy')->middleware('is-admin');
+//Route::get('/roles/{role}/edit', 'RoleController@edit')->middleware('is-admin');
+//Route::put('/roles/{role}', 'RoleController@update')->middleware('is-admin');
 
 Route::get('/genres', 'GenreController@index')->name('genre.index')->middleware('is-employee');
 Route::post('/genres', 'GenreController@store')->middleware('is-employee');

@@ -34,13 +34,19 @@
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="poster">Poster</label>
-                        <input type="file" class="form-control-file" id="poster" name="poster">
-                    </div>
+                    @if (isset($errors) && count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
+
                 </form>
 
             </div>

@@ -5,6 +5,7 @@ use App\Cinema;
 use App\Role;
 use App\Genre;
 use App\Movie;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -50,11 +51,22 @@ $factory->define(Cinema::class, function (Faker $faker){
 
 $factory->define(Genre::class, function (Faker $faker){
     return[
-        'name' => $faker->word
+        'name' => $faker->jobTitle
     ];
 });
 
 $factory->define(Movie::class, function (Faker $faker){
+    $name = $faker->company;
+    return[
+        'name' => $name,
+        'year' => $faker->numberBetween(2000, 2019),
+        'poster' => '',
+        'movie_premiere_image' => '',
+        'description' => $faker->paragraphs(2, true),
+    ];
+});
+
+/*$factory->define(Movie::class, function (Faker $faker){
     $name = $faker->company;
     return[
         'name' => $name,
@@ -66,4 +78,15 @@ $factory->define(Movie::class, function (Faker $faker){
             $faker->image('public/storage/images/premiere_images', 1280, 720,null, false),
         'description' => $faker->paragraphs(2, true),
     ];
-});
+});*/
+
+/*$factory->state(Movie::class, 'test', function (Faker $faker){
+    $name = $faker->company;
+    return[
+        'name' => $name,
+        'year' => $faker->numberBetween(2000, 2019),
+        'poster' => null,
+        'movie_premiere_image' => null,
+        'description' => $faker->paragraphs(2, true),
+    ];
+});*/
