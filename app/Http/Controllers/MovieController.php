@@ -76,9 +76,12 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
-        //
+        $movie = Movie::findOrFail($movie->id);
+
+        return view('movies.edit')->with(['movie' => $movie, 'genres' => $movie->genres()->pluck('genres.id'),
+            'all_genres' => Genre::all()]);
     }
 
     /**
@@ -88,9 +91,23 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required'],
+            'year' => ['required'],
+            'description' => ['required'],
+        ]);
+
+        $movie->update($data);
+        $movie->genres()->detach();
+
+        if(request('genres')){
+            $movie->genres()->attach(request('genres'));
+        }
+        return redirect()->action('MovieController@show', ['id' => $movie->id])
+            ->with(['movie' => $movie, 'movie_genres' => $movie->genres]);
+
     }
 
     /**

@@ -20,8 +20,11 @@ Route::get('/', function () {
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 Route::get('/employee', 'EmployeePanelController@index')->middleware('is-employee');
 
+Route::put('/movies/{movie}', 'MovieController@update');
 Route::get('/movies/create/', 'MovieController@create')->middleware('is-employee');
 Route::get('/movies/{movie}', 'MovieController@show');
+Route::get('/movies/{movie}/edit', 'MovieController@edit');
+
 Route::get('/movies/', 'MovieController@index');
 Route::post('/movies/', 'MovieController@store')->middleware('is-employee');
 Route::post('/api/movies/{movie}/poster', 'Api\MoviePosterController@store');

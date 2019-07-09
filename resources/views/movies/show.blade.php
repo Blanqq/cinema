@@ -16,6 +16,11 @@
                 </p>
                 @if(auth()->check())
                     @if (auth()->user()->isEmployee())
+                        <div class="form-group">
+                            <form action="/movies/{{ $movie->id }}/edit" method="GET">
+                                <button type="submit" class="btn btn-primary">Edit Movie</button>
+                            </form>
+                        </div>
                         @if (!$movie->poster)
                             <div class="form-group">
                                 <form action="/api/movies/{{$movie->id}}/poster" method="POST" enctype="multipart/form-data">
