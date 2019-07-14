@@ -23,6 +23,7 @@
                             <th scope="col">Street</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,11 @@
                                         <button type="submit" class="btn btn-danger">DELETE</button>
                                     </form>
 
+                                </td>
+                                <td>
+                                    <form action="/cinemas/{{ $cinema->slug }}" method="GET">
+                                        <button type="submit" class="btn btn-primary">Manage</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
