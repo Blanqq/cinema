@@ -26,14 +26,6 @@
                         <label for="genres">Genres (can select many)</label>
                         <select multiple class="form-control" name="genres[]" id="genres">
                             @foreach ($all_genres as $genre)
-                                {{--<option value="{{$genre->id}}"
-                                @if (in_array($genre->id, $genres->toArray()))
-                                    {{'a'}}
-                                    @else
-                                    {{'b'}}
-                                        @endif>
-                                    {{$genre->name}}</option>--}}
-
                                 <option value="{{$genre->id}}" @if (in_array($genre->id, $genres->toArray()))
                                     {{'selected'}}
                                 @endif>

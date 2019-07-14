@@ -23,6 +23,11 @@
                         <button type="submit" class="btn btn-primary">Movies</button>
                     </form>
                 </div>
+                <div class="form-group">
+                    <form action="/cinemas">
+                        <button type="submit" class="btn btn-primary">Cinemas</button>
+                    </form>
+                </div>
             </div>
         </div>
 

@@ -20,15 +20,22 @@ Route::get('/', function () {
 Route::get('/admin', 'AdminPanelController@index')->middleware('is-admin');
 Route::get('/employee', 'EmployeePanelController@index')->middleware('is-employee');
 
-Route::put('/movies/{movie}', 'MovieController@update');
+Route::put('/movies/{movie}', 'MovieController@update')->middleware('is-employee');
 Route::get('/movies/create/', 'MovieController@create')->middleware('is-employee');
 Route::get('/movies/{movie}', 'MovieController@show');
-Route::get('/movies/{movie}/edit', 'MovieController@edit');
+Route::get('/movies/{movie}/edit', 'MovieController@edit')->middleware('is-employee');
 
 Route::get('/movies/', 'MovieController@index');
 Route::post('/movies/', 'MovieController@store')->middleware('is-employee');
 Route::post('/api/movies/{movie}/poster', 'Api\MoviePosterController@store');
 Route::delete('/api/movies/{movie}/poster', 'Api\MoviePosterController@destroy');
+
+Route::post('/cinemas/', 'CinemaController@store');
+Route::get('/cinemas/create/', 'CinemaController@create')->middleware('is-employee');
+Route::get('/cinemas/', 'CinemaController@index')->middleware('is-employee');
+Route::delete('/cinemas/{cinema}', 'CinemaController@destroy')->middleware('is-employee');
+Route::get('/cinemas/{cinema}/edit', 'CinemaController@edit')->middleware('is-employee');
+Route::patch('/cinemas/{cinema}', 'CinemaController@update')->middleware('is-employee');
 
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');
