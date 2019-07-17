@@ -36,6 +36,7 @@ Route::get('/cinemas/', 'CinemaController@index')->middleware('is-employee');
 Route::delete('/cinemas/{cinema}', 'CinemaController@destroy')->middleware('is-employee');
 Route::get('/cinemas/{cinema}/edit', 'CinemaController@edit')->middleware('is-employee');
 Route::patch('/cinemas/{cinema}', 'CinemaController@update')->middleware('is-employee');
+Route::get('/cinemas/{cinema}', 'CinemaController@show')->middleware('is-employee');
 
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');

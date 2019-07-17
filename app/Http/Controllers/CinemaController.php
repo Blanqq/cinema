@@ -13,6 +13,11 @@ class CinemaController extends Controller
         return view('cinemas.index')->with(['cinemas' => Cinema::all()]);
     }
 
+    public function show(Cinema $cinema)
+    {
+        return view('cinemas.show')->with(['cinema' => Cinema::findOrFail($cinema->id)]);
+    }
+
     public function create()
     {
         return view('cinemas.create');
