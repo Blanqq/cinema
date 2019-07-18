@@ -5,6 +5,7 @@ use App\Cinema;
 use App\Role;
 use App\Genre;
 use App\Movie;
+use App\Room;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -64,6 +65,13 @@ $factory->define(Movie::class, function (Faker $faker){
         'movie_premiere_image' => '',
         'description' => $faker->paragraphs(2, true),
     ];
+});
+
+$factory->define(Room::class,function (Faker $faker){
+   return[
+       'name' => $faker->colorName,
+       'cinema_id' => Cinema::all()->count() ? Cinema::all()->random()->id : factory(Cinema::class)->create()->id,
+   ];
 });
 
 /*$factory->define(Movie::class, function (Faker $faker){
