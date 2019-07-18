@@ -31,6 +31,7 @@
                             <tr>
                                 <th scope="col">Room ID</th>
                                 <th scope="col">Name</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,6 +39,13 @@
                                 <tr>
                                     <th scope="row">{{ $room->id }}</th>
                                     <td>{{ $room->name }}</td>
+                                    <td>
+                                        <form action="/rooms/{{ $room->id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-primary">Delete Room</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
