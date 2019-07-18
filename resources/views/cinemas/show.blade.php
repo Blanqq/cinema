@@ -18,18 +18,51 @@
             </div>
         </div>
 
-        {{--<div class="card">
+        <div class="card mt-3">
             <div class="card-header">
                 {{ $cinema->name }} - Rooms
             </div>
             <div class="card-body">
-                @foreach ($cinema as $c)
 
-                @forelse
+                @if ($rooms->count())
+                    <div class="table-responsive">
+                        <table class="table table-hover table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">Room ID</th>
+                                <th scope="col">Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($rooms as $room)
+                                <tr>
+                                    <th scope="row">{{ $room->id }}</th>
+                                    <td>{{ $room->name }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p>No rooms assigned to this cinema</p>
+                @endif
 
-                @endforelse
+                    <form action="/cinemas/{{ $cinema->slug }}/rooms/" method="POST">
+                        @csrf
+                        <div class="form-inline">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" name="name" placeholder="Name of new room">
+                            <button type="submit" class="btn btn-danger">Add New Room To This Cinema</button>
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                        @include('layouts.validation-error-messages')
+
+                    </form>
+
             </div>
-        </div>--}}
+        </div>
 
     </div>
 @endsection

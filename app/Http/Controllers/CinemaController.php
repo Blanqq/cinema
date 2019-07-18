@@ -15,7 +15,9 @@ class CinemaController extends Controller
 
     public function show(Cinema $cinema)
     {
-        return view('cinemas.show')->with(['cinema' => Cinema::findOrFail($cinema->id)]);
+        return view('cinemas.show')->with(['cinema' => Cinema::findOrFail($cinema->id),
+                                                'rooms' => Cinema::findOrFail($cinema->id)->rooms
+            ]);
     }
 
     public function create()
