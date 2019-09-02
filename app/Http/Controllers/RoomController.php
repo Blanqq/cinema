@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Room;
 use App\Cinema;
+use App\Seat;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -23,5 +24,13 @@ class RoomController extends Controller
     {
         $room->delete();
         return back();
+    }
+
+    public function show(Cinema $cinema, Room $room)
+    {
+        //$seats = Room::orderBy('row')->orderBy('seat')->findOrFail($room->id)->seats;
+        $seats = $room->getOrderedSeats();
+
+        return view('rooms.show')->with(['cinema' => $cinema, 'room' => $room, 'seats' => $seats]);
     }
 }

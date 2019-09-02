@@ -40,6 +40,10 @@ Route::get('/cinemas/{cinema}', 'CinemaController@show')->middleware('is-employe
 
 Route::post('/cinemas/{cinema}/rooms/', 'RoomController@store')->middleware('is-employee');
 Route::delete('/rooms/{room}', 'RoomController@destroy')->middleware('is-employee');
+Route::get('/rooms/{cinema}/{room}', 'RoomController@show')->middleware('is-employee');
+
+Route::post('/seats/{room}', 'SeatController@store')->middleware('is-employee');
+Route::delete('/seats/{seat}', 'SeatController@destroy')->middleware('is-employee');
 
 
 Route::get('/roles', 'RoleController@index')->middleware('is-admin');

@@ -32,6 +32,7 @@
                                 <th scope="col">Room ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,7 +44,12 @@
                                         <form action="/rooms/{{ $room->id }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-primary">Delete Room</button>
+                                            <button type="submit" class="btn btn-danger">Delete Room</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="/rooms/{{ $cinema->slug }}/{{$room->id}}" method="GET">
+                                            <button type="submit" class="btn btn-primary">Manage</button>
                                         </form>
                                     </td>
                                 </tr>
