@@ -20,6 +20,18 @@
 
         <div class="card mt-3">
             <div class="card-header">
+                Manage shows in {{ $cinema->name }} cinema
+            </div>
+            <div class="card-body">
+                <form action="/cinemas/{{ $cinema->slug }}/shows" method="GET">
+                    <button type="submit" class="btn btn-primary">Manage Shows in this cinema</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
                 {{ $cinema->name }} - Rooms
             </div>
             <div class="card-body">

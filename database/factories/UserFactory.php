@@ -6,6 +6,8 @@ use App\Role;
 use App\Genre;
 use App\Movie;
 use App\Room;
+use App\Show;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -71,6 +73,16 @@ $factory->define(Room::class,function (Faker $faker){
    return[
        'name' => $faker->colorName,
        'cinema_id' => Cinema::all()->count() ? Cinema::all()->random()->id : factory(Cinema::class)->create()->id,
+   ];
+});
+
+$factory->define(Show::class, function (Faker $faker){
+    $date = $faker->dateTimeBetween('now', '+ 10 days');
+   return[
+       'starts_at' => $date,
+       'ends_at' => $date,
+        'movie_id' => Movie::all()->count() ? Movie::all()->random()->id : factory(Movie::class)->create()->id,
+        'room_id' => Room::all()->count() ? Room::all()->random()->id : factory(Room::class)->create()->id,
    ];
 });
 

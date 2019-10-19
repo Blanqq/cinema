@@ -43,11 +43,9 @@ class UsersTableSeeder extends Seeder
 
 
 
-        factory(User::class, 20)->create()->each(function($user){
+        factory(User::class, 10)->create()->each(function($user){
             $role_user = Role::where('name', 'User')->first();
             $user->roles()->attach($role_user);
         });
-
-        factory(Movie::class)->create();
     }
 }
