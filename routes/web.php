@@ -38,7 +38,8 @@ Route::get('/cinemas/{cinema}/edit', 'CinemaController@edit')->middleware('is-em
 Route::patch('/cinemas/{cinema}', 'CinemaController@update')->middleware('is-employee');
 Route::get('/cinemas/{cinema}', 'CinemaController@show')->middleware('is-employee');
 
-Route::get('/cinemas/{cinema}/shows', 'ShowController@index');
+Route::get('/cinemas/{cinema}/shows', 'ShowController@index')->middleware('is-employee');
+Route::post('cinemas/{cinema}/shows/', 'ShowController@store')->middleware('is-employee');
 
 Route::post('/cinemas/{cinema}/rooms/', 'RoomController@store')->middleware('is-employee');
 Route::delete('/rooms/{room}', 'RoomController@destroy')->middleware('is-employee');

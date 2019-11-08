@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Cinema extends Model
 {
@@ -24,5 +25,11 @@ class Cinema extends Model
     public function rooms()
     {
         return $this->hasMany(Room::class);
+    }
+
+    public function roomsFromCinema()
+    {
+        $rooms = DB::table('rooms')->where('cinema_id', $this->id)->orderBy('name')->get();
+        return $rooms;
     }
 }
