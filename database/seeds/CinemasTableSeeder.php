@@ -20,10 +20,6 @@ class CinemasTableSeeder extends Seeder
             foreach (range(1, 10) as $i2){
                 factory(Room::class)
                     ->create(['id' => $i2+(10*($i1-1)), 'name' => $names[$i2-1], 'cinema_id' => $i1]);
-                foreach (range(0,100, 20) as $hour){
-                    factory(Show::class)->create([
-                        ]);
-                }
             }
         }
     }

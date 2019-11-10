@@ -7,6 +7,7 @@ use App\Genre;
 use App\Movie;
 use App\Room;
 use App\Show;
+use App\Seat;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
@@ -84,6 +85,14 @@ $factory->define(Show::class, function (Faker $faker){
         'movie_id' => Movie::all()->count() ? Movie::all()->random()->id : factory(Movie::class)->create()->id,
         'room_id' => Room::all()->count() ? Room::all()->random()->id : factory(Room::class)->create()->id,
    ];
+});
+
+$factory->define(Seat::class, function(Faker $faker){
+    return[
+        'room_id' => Room::all()->count() ? Room::all()->random()->id : factory(Room::class)->create()->id,
+        'row' => $faker->numberBetween(1,20),
+        'seat' => $faker->numberBetween(1,30)
+    ];
 });
 
 /*$factory->define(Movie::class, function (Faker $faker){
