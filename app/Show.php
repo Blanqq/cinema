@@ -10,6 +10,11 @@ class Show extends Model
 {
     protected $guarded = [];
 
+
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class);
+    }
     public static function showsFromCinemaAndDate(Cinema $cinema, Carbon $date_from)
     {
         $date_to = clone $date_from;
@@ -41,5 +46,24 @@ class Show extends Model
              ->get();
 
          return $r->count() ? true : false;
+    }
+
+    public static function showsFromCinemaGroupedByMovie (Cinema $cinema, Carbon $date_from)
+    {
+        $date_to = clone $date_from;
+        $date_to->addDay();
+
+        $shows = DB::table('shows')
+            ->join('rooms', 'shows.room_id', '=', 'rooms.id')
+            ->join('movies', 'movies.id', '=', 'shows.movie_id')
+            ->where('rooms.cinema_id', '=', $cinema->id)
+            ->whereBetween('shows.starts_at', [$date_from, $date_to])
+            ->orderBy('rooms.id')
+            ->orderBy('shows.starts_at')
+            ->select(['shows.*', 'rooms.name AS room_name', 'movies.name AS movie_name'])
+            ->get()
+            ->groupBy('movie_name');
+
+        return $shows;
     }
 }

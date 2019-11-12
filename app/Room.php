@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
@@ -11,6 +12,18 @@ class Room extends Model
     public function seats()
     {
         return $this->hasMany(Seat::class);
+    }
+
+    public static function seatsGroupedByRows($room_id)
+    {
+        $r = DB::table('seats')
+            ->where('room_id', '=', $room_id)
+            ->orderBy('row')
+            ->orderBy('seat')
+            ->get()
+            ->groupBy('row');
+
+        return $r;
     }
 
     public function cinema()

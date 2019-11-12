@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cinema;
 use App\Movie;
 use App\Show;
+use App\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,21 @@ class ShowController extends Controller
             'movies' => Movie::all(),
             'rooms' => $cinema->roomsFromCinema()
             ]);
+    }
+
+    public function show(Cinema $cinema, Show $show)
+    {
+        //$room = Room::where('id', $show->room_id)->first();
+
+        $seatsGroupedByRows = Room::seatsGroupedByRows($show->room_id);
+        $movie = $show->movie->find($show->id);
+
+        return view('shows.show')->with([
+            'show' => $show,
+            'seats_grouped_by_rows' => $seatsGroupedByRows,
+            'movie' => $movie,
+            'cinema' => $cinema
+        ]);
     }
 
     public function store(Request $request)
