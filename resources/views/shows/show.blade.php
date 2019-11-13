@@ -11,10 +11,12 @@
     <div class="col">
         <div class="card">
             <div class="card-header">
-                {{ $cinema->name }} Cinema - Presents {{ $movie->name }} movie. Show take place {{ Carbon\Carbon::parse($show->starts_at)->format('d F Y H:m') }}
+                {{ $cinema->name }} Cinema - Presents {{ $movie->name }} movie. Show take place {{ Carbon\Carbon::parse($show->starts_at)->format('d F Y H:i') }}
             </div>
             <div class="card-body">
                 @if ($seats_grouped_by_rows->count())
+                    <form action="/cinemas/{{ $cinema->slug }}/shows/{{ $show->id }}/reservations" method="POST">
+                        @csrf
                     <div class="divTable">
                         <div class="divTableBody table table-hover table-dark">
 
@@ -25,13 +27,20 @@
                                     </div>
                                 @foreach ($seats as $seat)
                                         <div class="divTableCell">
-                                            <input type="checkbox">{{ $seat->seat }}
+                                            @if ($occupied_seats->contains('id', $seat->id))
+                                                x
+                                            @else
+                                                <input type="checkbox" name="seats[]" value="{{$seat->id}}">{{ $seat->seat }}
+                                            @endif
+
                                         </div>
                                 @endforeach
                                 </div>
                             @endforeach
                         </div>
                     </div>
+                        <button class="btn btn-primary form-control form-group mt-3">Make reservation</button>
+                    </form>
                 @endif
                 
                 </div>

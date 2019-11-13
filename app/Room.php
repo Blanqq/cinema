@@ -26,6 +26,17 @@ class Room extends Model
         return $r;
     }
 
+    public static function occupiedSeats(Show $show)
+    {
+        $r = DB::table('seats')
+            ->join('tickets', 'tickets.seat_id', '=', 'seats.id')
+            ->join('shows', 'shows.id', '=', 'tickets.show_id')
+            ->where('tickets.show_id','=', $show->id)
+            ->select('seats.id')
+            ->get();
+        return $r;
+    }
+
     public function cinema()
     {
         return $this->belongsTo(Cinema::class);

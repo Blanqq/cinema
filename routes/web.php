@@ -42,6 +42,9 @@ Route::get('/cinemas/{cinema}/shows', 'ShowController@index')->middleware('is-em
 Route::post('/cinemas/{cinema}/shows/', 'ShowController@store')->middleware('is-employee');
 Route::get('/cinemas/{cinema}/shows/{show}', 'ShowController@show');
 
+Route::post('/cinemas/{cinema}/shows/{show}/reservations', 'ReservationController@store')->middleware('auth');
+
+
 Route::post('/cinemas/{cinema}/rooms/', 'RoomController@store')->middleware('is-employee');
 Route::delete('/rooms/{room}', 'RoomController@destroy')->middleware('is-employee');
 Route::get('/rooms/{cinema}/{room}', 'RoomController@show')->middleware('is-employee');

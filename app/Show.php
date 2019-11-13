@@ -58,7 +58,6 @@ class Show extends Model
             ->join('movies', 'movies.id', '=', 'shows.movie_id')
             ->where('rooms.cinema_id', '=', $cinema->id)
             ->whereBetween('shows.starts_at', [$date_from, $date_to])
-            ->orderBy('rooms.id')
             ->orderBy('shows.starts_at')
             ->select(['shows.*', 'rooms.name AS room_name', 'movies.name AS movie_name'])
             ->get()

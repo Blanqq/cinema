@@ -35,13 +35,15 @@ class ShowController extends Controller
         //$room = Room::where('id', $show->room_id)->first();
 
         $seatsGroupedByRows = Room::seatsGroupedByRows($show->room_id);
-        $movie = $show->movie->find($show->id);
+        $occupied_seats = Room::occupiedSeats($show);
+        $movie = $show->movie->find($show->movie_id);
 
         return view('shows.show')->with([
             'show' => $show,
             'seats_grouped_by_rows' => $seatsGroupedByRows,
             'movie' => $movie,
-            'cinema' => $cinema
+            'cinema' => $cinema,
+            'occupied_seats' => $occupied_seats
         ]);
     }
 

@@ -4,6 +4,18 @@
     <div class="col">
         <div class="card">
             <div class="card-header">
+                Select Day
+            </div>
+            <div class="card-body">
+
+                        @foreach ($days_to_select as $day)
+                            <a href="/{{ $cinema->slug }}/?date={{ Carbon\Carbon::parse($day)->format('Y-m-d') }}">{{ Carbon\Carbon::parse($day)->format('d F Y') }}</a>
+                        @endforeach
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
                 {{$cinema->name}} - Shows on day {{ $date->format('d F Y') }}
             </div>
             <div class="card-body">
@@ -16,7 +28,7 @@
                                 <td>|
                                     @foreach ($shows as $show)
                                         <a href="/cinemas/{{ $cinema->slug }}/shows/{{ $show->id }}">
-                                            {{ Carbon\Carbon::parse($show->starts_at)->format('H:m') }}
+                                            {{ Carbon\Carbon::parse($show->starts_at)->format('H:i') }}
                                         </a>|
                                     @endforeach
                                 </td>
