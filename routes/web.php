@@ -69,6 +69,7 @@ Route::put('/genres/{genre}', 'GenreController@update')->middleware('is-employee
 
 Route::get('/users', 'UserController@index')->middleware('is-admin');
 Route::get('/users/{user}', 'UserController@show');
+Route::get('/profiles/{user}', 'ProfileController@show')->middleware('auth')->name('profile');
 Route::patch('/roles_users/update/{user}', 'RoleUserController@update')->middleware('is-admin');
 
 Route::get('/{cinema}', 'CinemaPageController@show');
