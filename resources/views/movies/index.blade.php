@@ -27,7 +27,7 @@
                         @foreach ($movies as $movie)
                             <tr>
                                 <th scope="row">{{ $movie->id }}</th>
-                                <td>{{ $movie->name }}</td>
+                                <td><a href="/movies/{{ $movie->id }}">{{ $movie->name }}</a></td>
                                 <td>{{ $movie->year }}</td>
                                 <td>
                                     <form action="/movies/{{ $movie->id  }}" method="POST">
