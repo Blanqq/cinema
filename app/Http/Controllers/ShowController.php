@@ -59,7 +59,7 @@ class ShowController extends Controller
         ]);
         $starts_at_datetime = Carbon::createFromFormat('Y-m-d H:i', $request->starts_at_date.' '.$request->starts_at_time);
         $ends_at_datetime = Carbon::createFromFormat('Y-m-d H:i', $request->ends_at_date.' '.$request->ends_at_time);
-        
+
         if(Show::isRoomOccupied($starts_at_datetime, $ends_at_datetime, $request->room))
         {
             $request->session()->flash('message', 'Room is occupied select different room or change time');
