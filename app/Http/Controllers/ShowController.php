@@ -54,16 +54,12 @@ class ShowController extends Controller
             'room' => ['required'],
             'starts_at_date' => ['required'],
             'starts_at_time' => ['required'],
-            'ends_at_date' => ['required'],
-            'ends_at_time' => ['required'],
+            'ends_at_date' => ['required', 'after_or_equal:starts_at_date'],
+            'ends_at_time' => ['required', 'after:starts_at_time'],
         ]);
         $starts_at_datetime = Carbon::createFromFormat('Y-m-d H:i', $request->starts_at_date.' '.$request->starts_at_time);
         $ends_at_datetime = Carbon::createFromFormat('Y-m-d H:i', $request->ends_at_date.' '.$request->ends_at_time);
-
-        if ($starts_at_datetime->gt($ends_at_datetime))
-        {
-            return back()->withErrors(['Invalid date time, with this date and time shows ends before it starts']);
-        }
+        
         if(Show::isRoomOccupied($starts_at_datetime, $ends_at_datetime, $request->room))
         {
             $request->session()->flash('message', 'Room is occupied select different room or change time');
