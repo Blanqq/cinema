@@ -44,7 +44,7 @@ class UserManagementTest extends TestCase
     {
         $user = $this->createUser();
         $this->signInAs('Admin');
-        $this->get('/users/'.$user->id)
+        $this->get('/users/'.$user->name)
             ->assertSee($user->name)
             ->assertSee('User Roles');
 
@@ -53,7 +53,7 @@ class UserManagementTest extends TestCase
     {
         $user = $this->createUser();
         $this->signInAs('User');
-        $this->get('/users/'.$user->id)
+        $this->get('/users/'.$user->name)
             ->assertSee($user->name)
             ->assertDontSee('User Roles');
     }
@@ -63,7 +63,7 @@ class UserManagementTest extends TestCase
         $user = $this->createUser();
         factory(Role::class)->create(['name' => 'Employee']);
         $this->signInAs('User');
-        $this->patch('/roles_users/update/'.$user->id, ['user_roles' => ['Employee']])
+        $this->patch('/roles_users/update/'.$user->name, ['user_roles' => ['Employee']])
             ->assertSee('insufficient privileges')
             ->assertStatus(403);
     }
@@ -72,7 +72,7 @@ class UserManagementTest extends TestCase
         $user = $this->createUser();
         $this->signInAs('Employee');
 
-        $this->patch('/roles_users/update/'.$user->id, ['user_roles' => ['Employee']])
+        $this->patch('/roles_users/update/'.$user->name, ['user_roles' => ['Employee']])
             ->assertSee('insufficient privileges')
             ->assertStatus(403);
     }
@@ -82,7 +82,7 @@ class UserManagementTest extends TestCase
         $user = $this->createUser();
         $role = factory(Role::class)->create(['name' => 'Employee']);
         $this->signInAs('Admin');
-        $this->patch('/roles_users/update/'.$user->id, ['user_roles' => ['Employee']]);
+        $this->patch('/roles_users/update/'.$user->name, ['user_roles' => ['Employee']]);
         $this->assertDatabaseHas('role_user', ['user_id' => $user->id, 'role_id' => $role->id]);
     }
 }

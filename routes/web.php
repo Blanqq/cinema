@@ -30,7 +30,7 @@ Route::post('/movies/', 'MovieController@store')->middleware('is-employee');
 Route::post('/api/movies/{movie}/poster', 'Api\MoviePosterController@store');
 Route::delete('/api/movies/{movie}/poster', 'Api\MoviePosterController@destroy');
 
-Route::post('/cinemas/', 'CinemaController@store');
+Route::post('/cinemas/', 'CinemaController@store')->middleware('is-employee');
 Route::get('/cinemas/create/', 'CinemaController@create')->middleware('is-employee');
 Route::get('/cinemas/', 'CinemaController@index')->middleware('is-employee');
 Route::delete('/cinemas/{cinema}', 'CinemaController@destroy')->middleware('is-employee');
