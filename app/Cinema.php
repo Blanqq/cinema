@@ -27,9 +27,9 @@ class Cinema extends Model
         return $this->hasMany(Room::class);
     }
 
-    public function roomsFromCinema()
-    {
-        $rooms = DB::table('rooms')->where('cinema_id', $this->id)->orderBy('name')->get();
-        return $rooms;
-    }
+    // public function roomsFromCinema()
+    // {
+    //     $rooms = DB::table('rooms')->where('cinema_id', $this->id)->orderBy('name')->get();
+    //     return $rooms;
+    // }
 }

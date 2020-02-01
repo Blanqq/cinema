@@ -26,7 +26,7 @@ class ShowController extends Controller
             'cinema' => $cinema,
             'date' => $date,
             'movies' => Movie::all(),
-            'rooms' => $cinema->roomsFromCinema()
+            'rooms' => $cinema->rooms
             ]);
     }
 
