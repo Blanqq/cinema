@@ -37698,10 +37698,12 @@ var render = function() {
                   _vm._v("Please select your cinema")
                 ]),
                 _vm._v(" "),
-                _vm._l(_vm.cinemas, function(cinema) {
-                  return _c("option", { domProps: { value: cinema.slug } }, [
-                    _vm._v(_vm._s(cinema.name))
-                  ])
+                _vm._l(_vm.cinemas, function(cinema, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: cinema.slug } },
+                    [_vm._v(_vm._s(cinema.name))]
+                  )
                 })
               ],
               2
