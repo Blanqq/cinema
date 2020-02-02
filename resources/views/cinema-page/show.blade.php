@@ -8,21 +8,21 @@
             </div>
             <div class="card-body">
 
-                        @foreach ($days_to_select as $day)
-                            <a href="/{{ $cinema->slug }}/?date={{ Carbon\Carbon::parse($day)->format('Y-m-d') }}">
-                                @if (Carbon\Carbon::parse($day)->format('Y-m-d') == Carbon\Carbon::parse($date)->format('Y-m-d'))
-                                <button class="btn btn-danger" disabled>
-                                    {{ Carbon\Carbon::parse($day)->format('d') }} <br>
-                                    {{ Carbon\Carbon::parse($day)->format('F') }}
-                                </button>
-                                @else
-                                <button class="btn btn-primary">
-                                    {{ Carbon\Carbon::parse($day)->format('d') }} <br>
-                                    {{ Carbon\Carbon::parse($day)->format('F') }}
-                                </button>
-                                @endif
-                            </a>
-                        @endforeach
+                @foreach ($days_to_select as $day)
+                    <a href="/{{ $cinema->slug }}/?date={{ Carbon\Carbon::parse($day)->format('Y-m-d') }}">
+                        @if (Carbon\Carbon::parse($day)->format('Y-m-d') == Carbon\Carbon::parse($date)->format('Y-m-d'))
+                            <button class="btn btn-danger" disabled>
+                            {{ Carbon\Carbon::parse($day)->format('d') }} <br>
+                            {{ Carbon\Carbon::parse($day)->format('F') }}
+                            </button>
+                        @else
+                            <button class="btn btn-primary">
+                            {{ Carbon\Carbon::parse($day)->format('d') }} <br>
+                            {{ Carbon\Carbon::parse($day)->format('F') }}
+                            </button>
+                        @endif
+                    </a>
+                @endforeach
             </div>
         </div>
 
@@ -49,7 +49,8 @@
                         </tbody>
                         @endforeach
                     </table>
-
+                @else
+                    <p>Currently no shows scheduled for today. Please select different day.</p>
                 @endif
             </div>
         </div>
