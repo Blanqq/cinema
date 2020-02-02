@@ -7,6 +7,13 @@
 @section('content')
 
     <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item" ><a href="/admin">Admin Panel</a></li>
+            <li class="breadcrumb-item" ><a href="/roles">Roles</a></li>
+            <li class="breadcrumb-item" active aria-current="page">Add</li>
+            </ol>
+        </nav>
         <div class="card">
             <div class="card-header">
                 Create New Role

@@ -2,6 +2,11 @@
 @section('content')
 
     <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="#">{{ $cinema->name }}</a></li>
+            </ol>
+        </nav>
         <div class="card mb-2">
             <div class="card-header">
                 Select Day

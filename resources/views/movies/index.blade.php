@@ -7,6 +7,12 @@
 @section('content')
 
     <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item" ><a href="/employee">Employee Panel</a></li>
+            <li class="breadcrumb-item" active aria-current="page">Movies</li>
+            </ol>
+        </nav>
         <div class="card">
             <div class="card-header">
                 Movies Management Panel

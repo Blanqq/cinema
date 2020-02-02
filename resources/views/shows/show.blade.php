@@ -9,7 +9,15 @@
 @section('content')
 
     <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item" ><a href="/{{ $cinema->slug }} "> {{ $cinema->name   }}</a></li>
+            <li class="breadcrumb-item" active aria-current="page">Make Reservation</li>
+            </ol>
+        </nav>
         <div class="card">
+
+
             <div class="card-header">
                 {{ $cinema->name }} Cinema - Presents {{ $movie->name }} movie. Show take place {{ Carbon\Carbon::parse($show->starts_at)->format('d F Y H:i') }}
             </div>
@@ -42,7 +50,7 @@
                         <button class="btn btn-primary form-control form-group mt-3">Make reservation</button>
                     </form>
                 @endif
-                
+
                 </div>
             </div>
         </div>

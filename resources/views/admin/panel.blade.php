@@ -7,6 +7,11 @@
 @section('content')
 
         <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item" ><a href="/employee">Admin Panel</a></li>
+                </ol>
+            </nav>
             <div class="card">
                 <div class="card-header">
                     Welcome in admin panel

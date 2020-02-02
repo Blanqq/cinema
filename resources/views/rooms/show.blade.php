@@ -7,6 +7,14 @@
 @section('content')
 
     <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item" ><a href="/employee">Employee Panel</a></li>
+            <li class="breadcrumb-item" ><a href="/cinemas">Cinemas</a></li>
+            <li class="breadcrumb-item" ><a href="/cinemas/{{ $cinema->slug }}">{{ $cinema->name}}</a></li>
+            <li class="breadcrumb-item" active aria-current="page"> Room {{  $room->name }} - Seats</li>
+            </ol>
+        </nav>
         <div class="card">
             <div class="card-header">
                 Show room {{ $room->name }} from cinema {{ $cinema->name }}
