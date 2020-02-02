@@ -38,4 +38,61 @@ class MovieTest extends TestCase
         $this->signInAs('User');
         $this->post('/movies/', $movie->toArray())->assertForbidden();
     }
+
+    public function testAdminCanEditMovie()
+    {
+        $this->signInAs('Admin');
+        $movie = factory(Movie::class)->create(['name' => 'Some Title']);
+        $this->get('/movies/'.$movie->id)->assertSee($movie->title);
+        $editedMovie = factory(Movie::class)->make();
+        $this->put('/movies/'.$movie->id, $editedMovie->toArray());
+        $this->get('/movies/'.$movie->id)->assertSee($editedMovie->name);
+    }
+
+    public function testEmployeeCanEditMovie()
+    {
+        $this->signInAs('Employee');
+        $movie = factory(Movie::class)->create(['name' => 'Some Title']);
+        $this->get('/movies/'.$movie->id)->assertSee($movie->title);
+        $editedMovie = factory(Movie::class)->make();
+        $this->put('/movies/'.$movie->id, $editedMovie->toArray());
+        $this->get('/movies/'.$movie->id)->assertSee($editedMovie->name);
+    }
+
+    public function testUserDoNotHaveAccessToEditMovieRoute()
+    {
+        $this->signInAs('User');
+        $movie = factory(Movie::class)->create();
+        $this->put('/movies/'.$movie->id, $movie->toArray())->assertForbidden();
+    }
+
+    // DELETE MOVIE FEATURE CURRENTLY DISABLED
+
+    // public function testAdminCanDeleteMovie()
+    // {
+    //     $this->signInAs('Admin');
+    //     $movie = factory(Movie::class)->create();
+    //     $this->assertDatabaseHas('movies', ['name' => $movie->name]);
+
+    //     $this->delete('/movies/'.$movie->id);
+    //     $this->assertDatabaseMissing('movies', ['name' => $movie->name]);
+    // }
+
+    // public function testEmployeeCanDeleteMovie()
+    // {
+    //     $this->signInAs('Employee');
+    //     $movie = factory(Movie::class)->create();
+    //     $this->assertDatabaseHas('movies', ['name' => $movie->name]);
+
+    //     $this->delete('/movies/'.$movie->id);
+    //     $this->assertDatabaseMissing('movies', ['name' => $movie->name]);
+    // }
+
+    // public function testUserDoNotHaveAccessToDeleteMovieRoute()
+    // {
+    //     $this->signInAs('User');
+    //     $movie = factory(Movie::class)->create();
+
+    //     $this->delete('/movies/'.$movie->id)->assertForbidden();
+    // }
 }

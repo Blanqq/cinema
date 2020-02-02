@@ -24,6 +24,7 @@ Route::put('/movies/{movie}', 'MovieController@update')->middleware('is-employee
 Route::get('/movies/create/', 'MovieController@create')->middleware('is-employee');
 Route::get('/movies/{movie}', 'MovieController@show');
 Route::get('/movies/{movie}/edit', 'MovieController@edit')->middleware('is-employee');
+//Route::delete('/movies/{movie}', 'MovieController@destroy')->middleware('is-employee');
 
 Route::get('/movies/', 'MovieController@index');
 Route::post('/movies/', 'MovieController@store')->middleware('is-employee');

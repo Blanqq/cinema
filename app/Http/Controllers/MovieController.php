@@ -113,11 +113,12 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Movie $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    // public function destroy(Movie $movie)
+    // {
+    //     $movie->delete();
+    //     return redirect('/movies/');
+    // }
 }
