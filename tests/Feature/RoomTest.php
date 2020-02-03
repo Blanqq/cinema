@@ -40,4 +40,34 @@ class RoomTest extends TestCase
             ->assertStatus(403);
     }
 
+    public function testAdminCanDeleteRoom()
+    {
+        $cinema = factory(Cinema::class)->create();
+        $room = factory(Room::class)->create(['cinema_id' => $cinema->id]);
+        $this->assertDatabaseHas('rooms', ['name' => $room->name]);
+        $this->signInAs('Admin');
+        $this->delete('/rooms/'.$room->id);
+
+        $this->assertDatabaseMissing('rooms', ['name' => $room->name]);
+    }
+
+    public function testEmployeeCanDeleteRoom()
+    {
+        $cinema = factory(Cinema::class)->create();
+        $room = factory(Room::class)->create(['cinema_id' => $cinema->id]);
+        $this->assertDatabaseHas('rooms', ['name' => $room->name]);
+        $this->signInAs('Admin');
+        $this->delete('/rooms/'.$room->id);
+
+        $this->assertDatabaseMissing('rooms', ['name' => $room->name]);
+    }
+
+    public function testUserDoNotHaveAccessToDeleteRoomRoute()
+    {
+        $cinema = factory(Cinema::class)->create();
+        $room = factory(Room::class)->create(['cinema_id' => $cinema->id]);
+        $this->signInAs('User');
+        $this->delete('/rooms/'.$room->id)
+            ->assertStatus(403);
+    }
 }
