@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Role;
 use App\Http\Controllers\Controller;
+use App\Rules\Recaptcha;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -42,20 +44,29 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Validate data form Request, add new User credentials, login User,
+     * and redirect to Homepage
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  Request  $request
+     * @param  Recaptcha $recaptcha
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function register(Request $request, Recaptcha $recaptcha)
     {
-        return Validator::make($data, [
+        $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'g-recaptcha-response' => ['required', $recaptcha]
         ]);
-    }
 
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
     /**
      * Create a new user instance after a valid registration.
      *
