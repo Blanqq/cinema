@@ -31,7 +31,23 @@ class ReservationTicketTest extends TestCase
         }
         $show = factory(Show::class)->create(['room_id' => $room->id]);
 
-        $this->post('/cinemas/'.$cinema->slug.'/shows/'.$show->id.'/reservations', $seatsIds)
+        $this->post('/cinemas/'.$cinema->slug.'/shows/'.$show->id.'/reservations', ['seats' => $seatsIds])
             ->assertRedirect('login');
+    }
+
+    public function testLoggedInUserCanMakeReservation()
+    {
+        $this->signInAs('User');
+        $cinema = factory(Cinema::class)->create();
+        $room = factory(Room::class)->create(['cinema_id' => $cinema->id]);
+        $seats = factory(Seat::class, 2)->create(['room_id' => $room->id]);
+        $seatsIds = [];
+        foreach($seats as $seat){
+            array_push($seatsIds, $seat->id);
+        }
+        $show = factory(Show::class)->create(['room_id' => $room->id]);
+        $this->post('/cinemas/'.$cinema->slug.'/shows/'.$show->id.'/reservations', ['seats' => $seatsIds]);
+        $this->assertDatabaseHas('tickets', ['seat_id' => $seatsIds[0]]);
+        $this->assertDatabaseHas('reservations', ['user_id' => auth()->id()]);
     }
 }
