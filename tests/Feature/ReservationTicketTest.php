@@ -21,7 +21,7 @@ class ReservationTicketTest extends TestCase
      */
     public function testUnsignedUserCantMakeReservation()
     {
-        //$this->withExceptionHandling();
+        $this->withExceptionHandling();
         $cinema = factory(Cinema::class)->create();
         $room = factory(Room::class)->create(['cinema_id' => $cinema->id]);
         $seats = factory(Seat::class, 2)->create(['room_id' => $room->id]);
