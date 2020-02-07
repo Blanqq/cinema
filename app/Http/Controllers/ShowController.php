@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cinema;
+use App\Http\Requests\StoreShowRequest;
 use App\Movie;
 use App\Show;
 use App\Room;
@@ -47,16 +48,8 @@ class ShowController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreShowRequest $request)
     {
-        $request->validate([
-            'movie' => ['required'],
-            'room' => ['required'],
-            'starts_at_date' => ['required'],
-            'starts_at_time' => ['required'],
-            'ends_at_date' => ['required', 'after_or_equal:starts_at_date'],
-            'ends_at_time' => ['required', 'after:starts_at_time'],
-        ]);
         $starts_at_datetime = Carbon::createFromFormat('Y-m-d H:i', $request->starts_at_date.' '.$request->starts_at_time);
         $ends_at_datetime = Carbon::createFromFormat('Y-m-d H:i', $request->ends_at_date.' '.$request->ends_at_time);
 
